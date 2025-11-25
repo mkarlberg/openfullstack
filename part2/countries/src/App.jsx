@@ -9,6 +9,7 @@ function App() {
   const [countriesSource, setCountriesSource] = useState([])
   const [countries, setCountries] = useState([])
   const [country, setCountry] = useState(null)
+  const [weather, setWeather] = useState(null)
 
   useEffect(() => {
     countryService
@@ -34,8 +35,8 @@ function App() {
   useEffect(() => {
     if (country) {
       weatherService
-        .get(country.latlng)
-        .then(w => console.log(w))
+        .getByCity(country.capital)
+        .then(w => setWeather(w))
     }
   }, [country])
 
@@ -47,7 +48,7 @@ function App() {
     <div>
       <div>find countries <input value={filter} onChange={event => setFilter(event.target.value)} /></div>
       <CountryList countries={countries} handleShow={handleShow} />
-      <Country country={country} />
+      <Country country={country} weather={weather} />
     </div>
   )
 }

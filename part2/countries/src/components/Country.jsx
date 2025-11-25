@@ -1,5 +1,7 @@
-const Country = ({country}) => {
-    if (!country) {
+import Weather from "./Weather"
+
+const Country = ({country, weather}) => {
+    if (!country || !weather) {
         return null
     }
 
@@ -14,6 +16,8 @@ const Country = ({country}) => {
                 {Object.keys(country.languages).map(languageKey => <li key={languageKey}>{country.languages[languageKey]}</li>)}
             </ul>
             <img src={country.flags.png} alt={country.flags.alt} />
+
+            <Weather country={country} weather={weather} />
         </>
     )
 }
